@@ -1,0 +1,27 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Server.Data;
+using Shared.Models;
+
+namespace Server.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CatagoriesController : ControllerBase
+    {
+        private readonly AppDBContext _appDBContext;
+
+        public CatagoriesController(AppDBContext appDBContext)
+        {
+            _appDBContext = appDBContext;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            List<Category> categories = await _appDBContext.Categories.ToListAsync();
+
+            return Ok(categories);
+        }
+    }
+}
