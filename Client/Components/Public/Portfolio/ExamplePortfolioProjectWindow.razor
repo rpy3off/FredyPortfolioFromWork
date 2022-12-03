@@ -1,0 +1,119 @@
+﻿<div class="modal fade @_modalClass" id="informationalModal" tabindex="-1" aria-labelledby="informationalModalLabel" role="dialog" style="display:@_modelDisplay">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="informationalModalLabel">Example Portfolio Project</h5>
+                <button @onclick="CloseModal" type="button" class="btn" data-bs-dismiss="modal" aira-label="Close"></button>
+             </div>
+                <div class="modal-body">
+                    <div id="carouselWithIndicator" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselWithIndicator" data-bs-slide-to="0" class="active" arai-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselWithIndicator" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselWithIndicator" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a href="assets/img/publicbackgrounds/bg-motherboard-dev.jpg" target="_blank">
+                                     <img src="assets/img/publicbackgrounds/bg-motherboard-dev.jpg" class="d-block w-100" alt="Portfolio Project carousel image"/>
+                                 </a>
+                            </div>
+
+                            <div class="carousel-item">
+                                <a href="assets/img/publicbackgrounds/bg-motherboard.jpg" target="_blank">
+                                     <img src="assets/img/publicbackgrounds/bg-motherboard.jpg" class="d-block w-100" alt="Portfolio Project carousel image"/>
+                                 </a>
+                            </div>
+
+                            <div class="carousel-item">
+                                <a href="assets/img/publicbackgrounds/bg-motherboard.jpg" target="_blank">
+                                     <img src="assets/img/publicbackgrounds/bg-motherboard-dev.jpg" class="d-block w-100" alt="Portfolio Project carousel image"/>
+                                 </a>
+                            </div>
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselWithIndicator" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+
+                         <button class="carousel-control-next" type="button" data-bs-target="#carouselWithIndicator" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                    <p class="text-muted my-2">
+                        Click an image to view it full screen (opens a new tab)
+                    </p>
+
+                    <a href="https://dotnet.microsoft.com/apps/aspnet" class="btn btn-lg d-block mx-5 btn-primary mt-5 shadow" target="_blank">
+                        <i class="fas fa-laptop-code"></i> Live Demo
+                    </a>
+
+                    <a href="https://github.com/dotnet/aspnetcore" class="btn btn-lg d-block mx-5 bg-dark text-white mt-3 shadow" target="_blank">
+                        <i class="fab fa-github-square"></i> GitHub Repo
+                    </a>
+
+                    <h1 class="mt-5"> Description </h1>
+
+                    <p>
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi gravida eget tellus nec ornare." +
+                                    " Mauris ac nisi sit amet erat feugiat consequat id sit amet erat. Integer at erat vitae est volutpat gravida sit amet nec velit." + 
+                                    " Phasellus et faucibus ex, id feugiat mi. Etiam justo est, sodales nec convallis non, pulvinar in nulla." + 
+                                    " Proin sed rutrum neque, ut posuere est. Pellentesque consequat nunc sit amet libero tempus, vitae lacinia est fringilla." + 
+                                    " Fusce ullamcorper pellentesque pulvinar. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." + 
+                                    " tempus nisl et tellus efficitur, ac facilisis sapien tristique. Etiam interdum nisl nec aliquet semper." + 
+                                    " Curabitur sagittis leo enim, sit amet pretium nisi facilisis id. Donec non maximus nulla, vel dapibus urna." +
+                                    " Aenean a lectus nibh. Nullam luctus vel magna id fermentum.";
+                    </p>
+
+                    <h1 class="mt-5">Core Features</h1>
+                    <ul>
+                        <li>Feature 1</li>
+                        <li>Feature 2</li>
+                        <li>Feature 3</li>
+                        <li>Feature 4</li>
+                        <li>Feature 5</li>
+                        <li>Feature 6</li>
+                    </ul>
+                </div>            
+            <div class="modal-footer">
+                    <button @onclick="CloseModal" type="button" class="btn btn-primary btn-lg shadow" data-bs-dismiss="modal">
+                        Close
+                    </button>
+             </div>
+        </div>
+    </div>
+</div>
+
+@if (_showBackdrop == true)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+@code{
+    [Parameter] public EventCallback ParentMethodToCallOnClickBtnClose { get; set; }
+    private string _modelDisplay = null;
+    private string _modalClass = null;
+    private bool _showBackdrop = false;
+
+    protected override void OnInitialized() => ShowModal();
+
+    private void ShowModal()
+    {
+        _modelDisplay = "block;";
+        _modalClass = "show";
+        _showBackdrop = true;
+    }
+
+    private void CloseModal()
+    {
+        _modelDisplay = "none";
+        _modalClass = string.Empty;
+        _showBackdrop = false;
+        ParentMethodToCallOnClickBtnClose.InvokeAsync();
+    }
+
+}
