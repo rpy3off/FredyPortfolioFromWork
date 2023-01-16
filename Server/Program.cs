@@ -21,6 +21,9 @@ builder.Services.AddCors(option =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddAutoMapper(typeof(DTOMaappings));
+
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
